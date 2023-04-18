@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import crud.onpe.service.GrupoVotacionService;
+import crud.onpe.service.ResumenService;
 
 @Controller
 public class OnpeController {
@@ -15,6 +17,8 @@ public class OnpeController {
 	@Autowired
 	GrupoVotacionService grupoVotacionService;
 	
+	@Autowired
+	ResumenService resumenService;
 
 	
 	@RequestMapping("/actasnumero/{idGrupoVotacion}")
@@ -28,5 +32,11 @@ public class OnpeController {
 		return "actas";
 	}
 	
+	@GetMapping("/presidencialgeneral")
+	public String presidencialgeneral(Model model){
+		model.addAttribute("presidencialgeneral", resumenService.getcahuana());
+		return "presidencialgeneral";
+	}
+
 	
 }
